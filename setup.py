@@ -21,7 +21,9 @@ setuptools.setup(
     # download_url='https://github.com/damiafuentes/DJITelloPy/archive/2.4.0.tar.gz',
     keywords=['drone', 'sdk', 'python'],
     install_requires=[
-        'numpy',
+        'matplotlib==3.6.2',
+        'numpy==1.23.5',
+        'opencv_contrib_python==4.5.5.64',
         'opencv-python',
         'av',
         'pillow'
