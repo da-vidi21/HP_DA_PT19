@@ -70,7 +70,7 @@ class PIDController:
     def get_error(self):  # returns the current error
         return self.error
 
-    # clamps the state values according to "range"(given as input during initiation)
+    # clamps the state values according to  "range"(given as input during initiation)
     def clamp_state_values(self):
         if (self.drone_roll > self.max_values[2]):
             self.drone_roll = self.max_values[2]
