@@ -1,5 +1,8 @@
 # Drona Aviation Pluto Drone Swarm Challenge
 
+Click here to read the problem statement.[High_Drona.pdf](High_Drona.pdf)
+ 
+ 
  Python wrapper for intraction with official Pluto Drone's firmware API. This package has following features:
 
 **Task-1**
@@ -10,8 +13,8 @@ left, take off - Land, etc.)
 **Task-2**
 
 - [x] Overhead camera calibration method
-- [x] ArUCo tag getection and tracking
-- [x] Estimation of pose of the ArUCo tag
+- [x] ArUCo tag detection and tracking
+- [x] Pose estimation of the ArUCo tag
 - [x] Implementation of PID for controlling drone
 - [x] Drone Hovering
 - [x] Drone movement in a rectangle of (1x2 meter)
@@ -38,6 +41,8 @@ git clone https://github.com/da-vidi21/HP_DA_PT19.git
 cd HP_DA_PT19
 pip install -e .
 ```
+## Approach 
+![approach](Images/Flowchart.png)
 ## File Description
 - **[calibration.py](hp_da_pt19/calibration.py)** :This file contains the code necessary for calibrating our camera. This step has several pre-requisites. we need to have a folder containing a set of checkerboard images taken using our camera. We have to make sure that these checkerboard images are of different poses and orientation. We need to provide the path to this directory and the size of the square in metres. We can also change the shape of the checkerboard pattern using the parameters given. We also have to make sure this matches with our checkerboard pattern. This code will generate two numpy files `calibration_matrix.npy` and `distortion_coefficients.npy`. These files are required to execute the next step that involves pose estimation. Note that the calibration and distortion numpy files given in this repository camera and its position specific.
 
@@ -96,7 +101,7 @@ In our case we have used 4X4 ArUCo tag Dictionary.
     ```
     def moving_average(self, position_store):
     ```
-    -Applies moving average to smooth out the coordinate values.
+    - Applies moving average to smooth out the coordinate values.
 
     ```
     def median_smoothing(self, position_store):
@@ -201,6 +206,84 @@ In our case we have used 4X4 ArUCo tag Dictionary.
     ```
     - Modifies the state values of the drone as per input and further modifies the `rc_raw_data` accordingly.
 
-- **[pidaxischanged.py](hp_da_pt19/pidaxischanged.py)** :
+- **[pidaxischanged.py](hp_da_pt19/pidaxischanged.py)** :This file contains code for calculating the state values of the drone and clamping the state values according to the PID controller.
+
+    ```
+    def __init__(self, target_position, k_values, range):
+    ```
+    - Initialises the values and properties of the PID controller.
+        - Coordinates of the target position are relative to the origin position.
+        - Axis of the camera module is inverted with that of the drone axis.
+    
+    ```
+    def calculate_state(self, current_position):
+    ```
+    - For calculating the state values as per the drone's `current_position`.
+
+    ```
+    def set_target(self, checkpoint):
+    ```
+    - Defines the target positon to the passed checkpoint.
+        - Checkpoint is a list of form *[x,y,z]*.
 
 
+    ```
+    def get_error(self): 
+    ```
+    - Returns the current state error.
+
+    ```
+    def clamp_state_values(self):
+    ```
+    - Clamps the state values according to the input received in the range during initiation.
+
+- **[rectangle.py](hp_da_pt19/rectangle.py)** :This file contains the code for the execution of task mentioned in `Task-2`, i.e. to hover the drone to a specific height and to move the drone in the rectangle of (1x2 meter).
+
+    ```
+    def visit_checkpoints(checkpoints, x_permissible_error=0.07, y_permissible_error=0.07, z_permissible_error=0.05, permissible_rms_velocity=0.05, id=0):
+    ```
+    - For the drone movement to the specific checkpoint.
+        - Checkpoint format consists of *[x,y,z]* and the time alloted for it.
+        - Further permissible error values in x,y,z and rms velocity has been provided.
+        - `id=0` is the ID number of the associated ArUCo tag.
+
+- **[utils.py](hp_da_pt19/utils.py)** : This file contains the code required for various utilities required for the functionalities.
+
+    ```
+    def aruco_display(corners, ids, rejected, image):
+    ```
+    - Computes and draws the center *$[x, y]$* coordinates of the ArUco
+
+    ```
+    def show_fps(output): 
+    ```
+    - Returns the frame rate in the tracking display.
+    ```
+    def print_coordinates(tvec): 
+    ```
+    - Returns the tracking coordinate.
+    ```
+    def plot(commands, coords, flight_duration, y="pitch", all=False):
+    ```
+    - Plots the tracking data(given by `pos_tracker`) and state values(given by PID controller).
+    ```
+    def plot_velo(velo_arr, flight_duration): 
+    ```
+    - Plots the velocity of the drone against time.
+
+## References
+
+- https://in.mathworks.com/discovery/pid-control.html
+
+## Citations
+```
+@article{article,
+author = {Wibowo, Agung and Susanto, Erwin},
+year = {2018},
+month = {09},
+pages = {81},
+title = {Performance Improvement of Water Temperature Control using Anti-windup Proportional Integral Derivative},
+journal = {Lontar Komputer : Jurnal Ilmiah Teknologi Informasi},
+doi = {10.24843/LKJITI.2018.v09.i02.p03}
+}
+```
