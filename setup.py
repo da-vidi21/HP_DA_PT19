@@ -18,7 +18,6 @@ setuptools.setup(
     author='Anonymous',
     author_email='vidit21srivastava@gmail.com',
     url='https://github.com/da-vidi21/HP_DA_PT19',
-    # download_url='https://github.com/damiafuentes/DJITelloPy/archive/2.4.0.tar.gz',
     keywords=['drone', 'sdk', 'python'],
     install_requires=[
         'matplotlib==3.6.2',
