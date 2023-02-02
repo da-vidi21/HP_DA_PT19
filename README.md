@@ -1,7 +1,7 @@
 # Drona Aviation Pluto Drone Swarm Challenge
 
 - Click here to read the problem statement [High_Drona.pdf](High_Drona.pdf)
-- Click here to read the report[Report_Task_1&2.pdf]()
+- Click here to read the report [Report_Task_1&2.pdf]()
  
  
  Python wrapper for intraction with official Pluto Drone's firmware API. This package has following features:
