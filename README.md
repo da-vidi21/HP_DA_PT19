@@ -1,8 +1,24 @@
 # Drona Aviation Pluto Drone Swarm Challenge
 
 - Click here to read the problem statement [High_Drona.pdf](High_Drona.pdf)
-- Click here to read the report [Report_Task_1&2.pdf]()
- 
+- Click here to read the report [Report_Task_1&2.pdf](Submission_Report_Task1&2.pdf)
+- Click here for Published Python Package [hp_da_pt19](https://pypi.org/project/hp-da-pt19/0.0.2/)
+
+## Overview
+Drones are being developed for use in various applications like military, medical aid delivery, as an
+emergency first responder, for surveillance, etc. They have four counter rotating propellers placed
+on the same airframe. They are controlled by differential adjustment of the angular velocities of the
+rotors. Drones can move freely in 3D space i.e.; they have 6 degrees of freedom (DOF). But they have
+only 4 rotors (actuators) to control all 6 DOF. 
+Thus, they are underactuated systems. Independent
+control of 2 states namely x (forward/backward), y (right/left) translation is lost. These translations
+are coupled with the Roll & Pitch angles.
+
+**Drona Aviation Pluto 1.2** is an open-source programmable nano drone allows users to integrate with
+external hardware. So, that we can program our drone to add multiple applications. The drone has
+an onboard microcontroller that helps implement various algorithms to stabilize and fly the drone.
+Its firmware is a modified version of the popular, open-source flight software, Cleanflight.
+Our solution to this challenge comprises of various strategies for the control of this drone.
  
  Python wrapper for intraction with official Pluto Drone's firmware API. This package has following features:
 
@@ -238,7 +254,7 @@ In our case we have used 4X4 ArUCo tag Dictionary.
     ```
     - Clamps the state values according to the input received in the range during initiation.
 
-- **[rectangle.py](hp_da_pt19/rectangle.py)** :This file contains the code for the execution of task mentioned in `Task-2`, i.e. to hover the drone to a specific height and to move the drone in the rectangle of (1x2 meter).
+- **[rectangle.py](hp_da_pt19/rectangle.py)** :This file contains the code for the execution of task mentioned in `Task-2`, i.e. to hover the drone to a specific height and to move the drone in the rectangle of (1x2 meter). To run Task-2 connect to drone via Wi-Fi and then run this file.
 
     ```
     def visit_checkpoints(checkpoints, x_permissible_error=0.07, y_permissible_error=0.07, z_permissible_error=0.05, permissible_rms_velocity=0.05, id=0):
