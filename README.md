@@ -1,8 +1,8 @@
 # Drona Aviation Pluto Drone Swarm Challenge
 
-- Click here to read the problem statement [High_Drona.pdf](High_Drona.pdf)
-- Click here to read the report [Report_Task_1&2.pdf](Submission_Report_Task1&2.pdf)
-- Click here for Published Python Package [hp_da_pt19](https://pypi.org/project/hp-da-pt19/0.0.2/)
+- Click here to read the problem statement | [High_Drona.pdf](High_Drona.pdf)
+- Click here to read the report | [Submission_Report_Task_1&2.pdf](Submission_Report_Task1&2.pdf)
+- Click here for Published Python Package | [hp_da_pt19](https://pypi.org/project/hp-da-pt19/0.0.2/)
 
 ## Overview
 Drones are being developed for use in various applications like military, medical aid delivery, as an
