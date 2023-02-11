@@ -38,7 +38,7 @@ left, take off - Land, etc.)
 
 **Task-3**
 
-- [ ] Drone Swarming in a rectangle of(1x2 meter)  
+- [x] Drone Swarming in a rectangle of(1x2 meter)  
 
 ## Installation Using pip
 ```
