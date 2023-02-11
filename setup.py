@@ -10,7 +10,7 @@ repo_code_url = "https://github.com/da-vidi21/HP_DA_PT19"
 setuptools.setup(
     name='hp_da_pt19',
     packages=['hp_da_pt19'],
-    version='0.0.3',
+    version='0.0.5',
     license='MIT',
     description='Package contaning python wrapper for supporting pitch,roll,yaw, swarms, and more',
     long_description=readme,

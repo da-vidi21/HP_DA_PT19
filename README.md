@@ -1,7 +1,7 @@
 # Drona Aviation Pluto Drone Swarm Challenge
 
 - Click here to read the problem statement | [High_Drona.pdf](High_Drona.pdf)
-- Click here to read the report | [Submission_Report_Task_1&2.pdf](Submission_Report_Task1&2.pdf)
+- Click here to read the report | [Final Submission Report#19.pdf](Final_Submission_Report#19.pdf)
 - Click here for Published Python Package | [hp_da_pt19](https://pypi.org/project/hp-da-pt19/0.0.2/)
 
 ## Overview
@@ -60,6 +60,21 @@ pip install -e .
 ```
 ## Approach 
 ![approach](Images/Flowchart.png)
+
+## File Structure
+```
+|-calibration_data
+    |-calibration_matrix.npy
+    |-distorsion_coefficients.npy
+|-__init__.py
+|-arucoTracking.py
+|-calibration.py
+|-Communication.py
+|-pidaxischanged.py
+|-rectangle.py
+|-swarm.py
+|-utils.py
+```
 ## File Description
 - **[calibration.py](hp_da_pt19/calibration.py)** :This file contains the code necessary for calibrating our camera. This step has several pre-requisites. we need to have a folder containing a set of checkerboard images taken using our camera. We have to make sure that these checkerboard images are of different poses and orientation. We need to provide the path to this directory and the size of the square in metres. We can also change the shape of the checkerboard pattern using the parameters given. We also have to make sure this matches with our checkerboard pattern. This code will generate two numpy files `calibration_matrix.npy` and `distortion_coefficients.npy`. These files are required to execute the next step that involves pose estimation. Note that the calibration and distortion numpy files given in this repository camera and its position specific.
 
@@ -288,9 +303,27 @@ In our case we have used 4X4 ArUCo tag Dictionary.
     ```
     - Plots the velocity of the drone against time.
 
+- **[swarm.py](hp_da_pt19/swarm.py)** : This file conatains the code required for operating the swarm of drones.
+    ```
+    def visitCheckpoints(checkpoints,drone,pos_tracker,pid,id):
+    ```
+    - For the movement of specific drone to the specific checkpoint.
+        - Checkpoint format consists of *[x,y,z]* and the time alloted for it.
+        - `id=0` is the ID number of the associated ArUCo tag.
+    ```
+    def nSwarm(checkpoints,ID,IPs):
+    ```
+    - For initiating a separate thread for the PID of each drone connected to the system.
+    - *Note: The thread for tracking is same for all the drones.*
+
 ## References
 
 - https://in.mathworks.com/discovery/pid-control.html
+- https://docs.python.org/3/library/socket.html
+- http://www.multiwii.com/wiki/index.php?title=Multiwii_Serial_Protocol
+ 
+
+
 
 ## Citations
 ```
